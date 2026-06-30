@@ -1,0 +1,76 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets"
+public_folder: "/assets"
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Homepage"
+        name: "homepage"
+        file: "_data/homepage.json"
+        fields:
+          - {label: "Hero Headline", name: "hero_title", widget: "string"}
+          - {label: "Hero Introduction", name: "hero_intro", widget: "text"}
+          - {label: "Panel Headline", name: "panel_title", widget: "string"}
+          - {label: "Panel Item 1 — Announcements", name: "panel_1", widget: "text"}
+          - {label: "Panel Item 2 — Newsletter", name: "panel_2", widget: "text"}
+          - {label: "Panel Item 3 — Sponsors", name: "panel_3", widget: "text"}
+          - {label: "Section Headline", name: "section_title", widget: "string"}
+          - {label: "Section Copy", name: "section_copy", widget: "text"}
+          - {label: "Academic Pillar", name: "pillar_academic", widget: "text"}
+          - {label: "Careers Pillar", name: "pillar_careers", widget: "text"}
+          - {label: "Community Pillar", name: "pillar_community", widget: "text"}
+      - label: "About Us"
+        name: "about"
+        file: "_data/about.json"
+        fields:
+          - {label: "Page Title", name: "title", widget: "string"}
+          - {label: "Mission", name: "mission", widget: "markdown"}
+          - {label: "Member Benefits", name: "benefits", widget: "markdown"}
+          - {label: "Committee", name: "committee", widget: "markdown"}
+          - {label: "Events", name: "events", widget: "markdown"}
+      - label: "Footer"
+        name: "footer"
+        file: "_data/footer.json"
+        fields:
+          - {label: "Footer Text", name: "text", widget: "text"}
+
+  - name: "announcements"
+    label: "Announcements"
+    folder: "_announcements"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Event", "Careers", "Society news", "Deadline", "Homepage notice"]
+      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "Content", name: "body", widget: "text"}
+
+  - name: "newsletters"
+    label: "Weekly Newsletters"
+    folder: "_newsletters"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Headline", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "Short Summary", name: "summary", widget: "text"}
+      - {label: "Full Body", name: "body", widget: "markdown"}
+
+  - name: "sponsors"
+    label: "Sponsors"
+    folder: "_sponsors"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Sponsor Name", name: "title", widget: "string"}
+      - {label: "Website URL", name: "url", widget: "string", required: false}
+      - {label: "Logo Image", name: "logo", widget: "image", required: false}
+      - {label: "Display Order (1 = first)", name: "order", widget: "number", default: 99}
